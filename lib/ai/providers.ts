@@ -3,7 +3,7 @@ import {
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
-import { xai } from '@ai-sdk/xai';
+import { openrouter } from '@openrouter/ai-sdk-provider';
 import {
   artifactModel,
   chatModel,
@@ -23,15 +23,9 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-vision-1212'),
-        'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-beta'),
-          middleware: extractReasoningMiddleware({ tagName: 'think' }),
-        }),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
-      },
-      imageModels: {
-        'small-model': xai.imageModel('grok-2-image'),
-      },
+        'chat-model': openrouter('deepseek/deepseek-r1-0528:free'),
+        'chat-model-reasoning': openrouter('deepseek/deepseek-r1-0528:free'),
+        'title-model': openrouter('deepseek/deepseek-r1-0528:free'),
+        'artifact-model': openrouter('deepseek/deepseek-r1-0528:free'),
+      }
     });
